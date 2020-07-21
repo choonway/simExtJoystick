@@ -64,7 +64,8 @@ DWORD WINAPI _joyThread(LPVOID lpParam)
     if (FAILED(hr = DirectInput8Create(GetModuleHandle(NULL), DIRECTINPUT_VERSION, 
                                    IID_IDirectInput8, (VOID**)&di, NULL)))
     {
-        simAddLog("Joystick", sim_verbosity_errors, "failed initializing DirectInput library.");
+        //simAddLog("Joystick", sim_verbosity_errors, "failed initializing DirectInput library.");
+        printf("Joystick failed initializing DirectInput library.\n");
         _joyThreadEnded=true;
         _inJoyThread=false;
         return(0);
@@ -74,7 +75,8 @@ DWORD WINAPI _joyThread(LPVOID lpParam)
     if (FAILED(hr = di->EnumDevices(DI8DEVCLASS_GAMECTRL, enumCallback,
                                 NULL, DIEDFL_ATTACHEDONLY)))
     {
-        simAddLog("Joystick", sim_verbosity_errors, "failed enumerating devices.");
+        //simAddLog("Joystick", sim_verbosity_errors, "failed enumerating devices.");
+        printf("Joystick failed enumerating devices.\n");
         _joyThreadEnded=true;
         _inJoyThread=false;
         return(0);
@@ -100,18 +102,21 @@ DWORD WINAPI _joyThread(LPVOID lpParam)
         if (joysticks[i]!=NULL)
         {
             if (FAILED(hr = joysticks[i]->SetDataFormat(&c_dfDIJoystick2))) 
-                simAddLog("Joystick", sim_verbosity_errors, "failed at 'SetDataFormat'.");
+                //simAddLog("Joystick", sim_verbosity_errors, "failed at 'SetDataFormat'.");
+                printf("Joystick failed at 'SetDataFormat'.");
 
             if (FAILED(hr = joysticks[i]->SetCooperativeLevel(NULL, DISCL_EXCLUSIVE | DISCL_FOREGROUND)))
                ;// do not output an error here!      printf("Failed at 'SetCooperativeLevel'.\n");
 
             capabilities[i].dwSize = sizeof(DIDEVCAPS);
             if (FAILED(hr = joysticks[i]->GetCapabilities(&capabilities[i])))
-                simAddLog("Joystick", sim_verbosity_errors, "failed at 'GetCapabilities'.");
+                //simAddLog("Joystick", sim_verbosity_errors, "failed at 'GetCapabilities'.");
+                printf("Joystick failed at 'GetCapabilities'.");
 
             currentDeviceIndex=i;
             if (FAILED(hr = joysticks[i]->EnumObjects(enumAxesCallback, NULL, DIDFT_AXIS)))
-                simAddLog("Joystick", sim_verbosity_errors, "failed at 'EnumObjects'.");
+                //simAddLog("Joystick", sim_verbosity_errors, "failed at 'EnumObjects'.");
+                printf("Joystick failed at 'EnumObjects'.");
         }
     }
     joyGoodToRead=true;
@@ -132,7 +137,8 @@ DWORD WINAPI _joyThread(LPVOID lpParam)
 
                     if ((hr == DIERR_INVALIDPARAM) || (hr == DIERR_NOTINITIALIZED))
                     {
-                        simAddLog("Joystick", sim_verbosity_errors, "failed at fatal error.");
+                        //simAddLog("Joystick", sim_verbosity_errors, "failed at fatal error.");
+                        printf("Joystick failed at fatal error.");
                         cont=false;
                     }
 
@@ -145,7 +151,8 @@ DWORD WINAPI _joyThread(LPVOID lpParam)
                 if (cont)
                 {
                     if (FAILED(hr = joysticks[i]->GetDeviceState(sizeof(DIJOYSTATE2), &joystickStates[i])))
-                        simAddLog("Joystick", sim_verbosity_errors, "failed at 'GetDeviceState'.");
+                       // simAddLog("Joystick", sim_verbosity_errors, "failed at 'GetDeviceState'.")
+                       printf("Joystick failed at 'GetDeviceState'.");
                 }
             }
         }

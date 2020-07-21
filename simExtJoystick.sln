@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "simExtJoystick", "simExtJoystick.vcxproj", "{30A53B8E-E1A6-451C-B3F4-4E1468723FFA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{30A53B8E-E1A6-451C-B3F4-4E1468723FFA}.Release|x64.ActiveCfg = Release|x64
+		{30A53B8E-E1A6-451C-B3F4-4E1468723FFA}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5480133A-C397-4024-B3C6-9D9A04226226}
+	EndGlobalSection
+EndGlobal
